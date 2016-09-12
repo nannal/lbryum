@@ -1182,12 +1182,12 @@ class Abstract_Wallet(PrintError):
                 self.add_unverified_tx (tx_hash, tx_height)
 
         # if we are on a pruning server, remove unverified transactions
-        with self.lock:
-            vr = self.verified_tx.keys() + self.unverified_tx.keys()
-        for tx_hash in self.transactions.keys():
-            if tx_hash not in vr:
-                self.print_error("removing transaction", tx_hash)
-                self.transactions.pop(tx_hash)
+        # with self.lock:
+        #     vr = self.verified_tx.keys() + self.unverified_tx.keys()
+        # for tx_hash in self.transactions.keys():
+        #     if tx_hash not in vr:
+        #         self.print_error("removing transaction", tx_hash)
+        #         self.transactions.pop(tx_hash)
 
     def start_threads(self, network):
         self.network = network
