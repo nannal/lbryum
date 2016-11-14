@@ -18,8 +18,8 @@
 
 
 # Note: The deserialization code originally comes from ABE.
-
-
+from google.protobuf import json_format
+from lbryschema.migrate import migrate as migrate_schema
 import lbrycrd
 from lbrycrd import *
 from util import print_error, profiler
@@ -389,14 +389,14 @@ def parse_scriptSig(d, bytes):
 class NameClaim(object):
     def __init__(self, name, value):
         self.name = name
-        self.value = value
+        self.value = json_format.MessageToJson(migrate_schema(value))
 
 
 class ClaimUpdate(object):
     def __init__(self, name, claim_id, value):
         self.name = name
         self.claim_id = claim_id
-        self.value = value
+        self.value = json_format.MessageToJson(migrate_schema(value))
 
 
 class ClaimSupport(object):
