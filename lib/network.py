@@ -516,7 +516,11 @@ class Network(util.DaemonThread):
 
     def get_index(self, method, params):
         """ hashable index for subscriptions and cache"""
-        return str(method) + (':' + str(params[0]) if params  else '')
+        try:
+            return '{}:{}'.format(method, params[0] if params else '')
+        except UnicodeError:
+            log.warning('Support for non-ascii is limited. Failed to encode {!r}'.format(params[0]))
+            return u'{}:{}'.format(method, params[0] if params else '')
 
     def process_responses(self, interface):
         responses = interface.get_responses()
