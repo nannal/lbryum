@@ -542,6 +542,7 @@ class Network(util.DaemonThread):
                     self.subscribed_addresses.add(params[0])
             else:
                 if not response:  # Closed remotely / misbehaving
+                    log.info('Lost connection to %s: misbehaving', interface.server)
                     self.connection_down(interface.server)
                     break
                 # Rewrite response shape to match subscription request response
@@ -634,11 +635,13 @@ class Network(util.DaemonThread):
             if socket:
                 self.new_interface(server, socket)
             else:
+                log.info('Lost connection to %s: maintaining sockets', server)
                 self.connection_down(server)
 
         # Send pings and shut down stale interfaces
         for interface in self.interfaces.values():
             if interface.has_timed_out():
+                log.info('Lost connection to %s: timed out', interface.server)
                 self.connection_down(interface.server)
             elif interface.ping_required():
                 params = [LBRYUM_VERSION, PROTOCOL_VERSION]
