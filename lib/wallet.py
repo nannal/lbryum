@@ -25,6 +25,9 @@ import time
 import json
 import copy
 import re
+
+from lbryschema.decode import smart_decode
+
 from functools import partial
 from unicodedata import normalize
 from decimal import Decimal
@@ -48,6 +51,7 @@ import paymentrequest
 
 # internal ID for imported account
 IMPORTED_ACCOUNT = '/x'
+
 
 class WalletStorage(PrintError):
 
@@ -202,6 +206,11 @@ class Abstract_Wallet(PrintError):
 
         self.check_history()
 
+        self.claim_certificates    = storage.get('claim_certificates', {})
+
+        if self.storage.get('claim_certificates') is None:
+            self.storage.put('claim_certificates', {})
+
         # save wallet type the first time
         if self.storage.get('wallet_type') is None:
             self.storage.put('wallet_type', self.wallet_type)
@@ -222,7 +231,7 @@ class Abstract_Wallet(PrintError):
         self.txo = self.storage.get('txo', {})
         self.pruned_txo = self.storage.get('pruned_txo', {})
         tx_list = self.storage.get('transactions', {})
-        self.claimtrie_transactions = self.storage.get('claimtrie_transactions',{})
+        self.claimtrie_transactions = self.storage.get('claimtrie_transactions', {})
         self.transactions = {}
         for tx_hash, raw in tx_list.items():
             tx = Transaction(raw)
@@ -237,9 +246,6 @@ class Abstract_Wallet(PrintError):
                 if txout[0] & (TYPE_CLAIM | TYPE_UPDATE | TYPE_SUPPORT):
                     self.claimtrie_transactions[tx_hash+':'+str(n)] = txout[0]
 
-
-
-
     @profiler
     def save_transactions(self, write=False):
         with self.transaction_lock:
@@ -251,9 +257,23 @@ class Abstract_Wallet(PrintError):
             self.storage.put('txo', self.txo)
             self.storage.put('pruned_txo', self.pruned_txo)
             self.storage.put('addr_history', self.history)
-            self.storage.put('claimtrie_transactions',self.claimtrie_transactions)
+            self.storage.put('claimtrie_transactions', self.claimtrie_transactions)
             if write:
                 self.storage.write()
+
+    def save_certificate(self, name, claim_id, private_key):
+        self.storage.put('claim_certificates', {
+            name: {
+                'claim_id': claim_id,
+                'private_key': private_key
+                }
+            }
+        )
+        self.storage.write()
+
+    def get_certificate_info(self, name):
+        certificates = self.storage.get('claim_certificates')
+        return certificates.get(name, None)
 
     def clear_history(self):
         with self.transaction_lock:
@@ -1008,8 +1028,9 @@ class Abstract_Wallet(PrintError):
                         output['category']='claim'
                         claim_name, claim_value = txout[1][0]
                         output['name'] = claim_name
-                        output['value'] = claim_value
-                        claim_id = lbrycrd.claim_id_hash(rev_hex(output['txid']).decode('hex'),output['nout'])
+                        output['value'] = smart_decode(claim_value).claim_dict
+                        claim_id = lbrycrd.claim_id_hash(rev_hex(output['txid']).decode('hex'),
+                                                         output['nout'])
                         claim_id = lbrycrd.encode_claim_id_hex(claim_id)
                         output['claim_id'] = claim_id
                     elif txout[0] & TYPE_SUPPORT:
@@ -1021,7 +1042,7 @@ class Abstract_Wallet(PrintError):
                         output['category']='update'
                         claim_name, claim_id, claim_value = txout[1][0]
                         output['name'] = claim_name
-                        output['value'] = claim_value
+                        output['value'] = smart_decode(claim_value).claim_dict
                         output['claim_id'] = lbrycrd.encode_claim_id_hex(claim_id)
                     if not expired:
                         output['blocks_to_expiration'] = tx_height + lbrycrd.EXPIRATION_BLOCKS - local_height

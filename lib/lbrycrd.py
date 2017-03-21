@@ -257,8 +257,8 @@ def public_key_to_bc_address(public_key):
 
 
 #lbrycrd/src/chainparams.cpp line 176
-PUBKEY_ADDRESS = (0, 85)
-SCRIPT_ADDRESS = (5, 122)
+PUBKEY_ADDRESS = (0, 111)
+SCRIPT_ADDRESS = (5, 196)
 
 
 def hash_160_to_bc_address(h160, addrtype=0):

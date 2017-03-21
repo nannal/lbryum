@@ -22,10 +22,10 @@ def set_config(c):
 
 DEFAULT_CONFIG = {
     'default_servers': {
-        'lbryum1.lbry.io': {'t': '50001'},
-        'lbryum2.lbry.io': {'t': '50001'},
-        'lbryum3.lbry.io': {'t': '50001'},
-    }
+        'localhost': {'t': '50001'},
+    },
+    'chain': 'lbrycrdreg'
+
 }
 
 class SimpleConfig(object):

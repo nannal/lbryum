@@ -186,7 +186,7 @@ class _Blockchain(util.PrintError):
                 h = self.deserialize_header(h)
                 return h
 
-    def get_target(self, index, first, last, chain='main'):
+    def get_target(self, index, first, last):
         """
         this follows the calculations in lbrycrd/src/lbry.cpp
         Returns: (bits, target)
