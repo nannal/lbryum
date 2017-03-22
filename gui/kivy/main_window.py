@@ -74,7 +74,7 @@ class ElectrumWindow(App):
             self.history_screen.update()
 
     def _get_bu(self):
-        return self.electrum_config.get('base_unit', 'mBTC')
+        return self.electrum_config.get('base_unit', 'mLBC')
 
     def _set_bu(self, value):
         assert value in base_units.keys()
@@ -693,4 +693,3 @@ class ElectrumWindow(App):
             Clock.schedule_once(lambda x: apply(f, args + (pw,)), 0.1)
         popup = PasswordDialog(title, callback)
         popup.open()
-

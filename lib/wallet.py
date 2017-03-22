@@ -1449,7 +1449,7 @@ class Abstract_Wallet(PrintError):
         if not r:
             return
         out = copy.copy(r)
-        out['URI'] = 'bitcoin:' + addr + '?amount=' + util.format_satoshis(out.get('amount'))
+        out['URI'] = 'lbry:' + addr + '?amount=' + util.format_satoshis(out.get('amount'))
         out['status'] = self.get_request_status(addr)
         # check if bip70 file exists
         rdir = config.get('requests_dir')
@@ -2091,7 +2091,7 @@ class Wallet(object):
                     msg += "\nIt does not contain any keys, and can safely be removed."
                 else:
                     # creation was complete if lbryum was run from source
-                    msg += "\nPlease open this file with Electrum 1.9.8, and move your coins to a new wallet."
+                    msg += "\nOriginal message read\nPlease open this file with Electrum 1.9.8, and move your coins to a new wallet.\n However this isn't Electrum and maybe you did a bad thing."
             raise BaseException(msg)
 
         wallet_type = storage.get('wallet_type')

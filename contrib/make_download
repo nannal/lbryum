@@ -15,12 +15,12 @@ string = string.replace("##VERSION_WIN##", version_win)
 string = string.replace("##VERSION_MAC##", version_mac)
 
 files = {
-    'tgz': "Electrum-%s.tar.gz" % version,
-    'zip': "Electrum-%s.zip" % version,
-    'mac': "electrum-%s.dmg" % version_mac,
-    'win': "electrum-%s.exe" % version_win,
-    'win_setup': "electrum-%s-setup.exe" % version_win,
-    'win_portable': "electrum-%s-portable.exe" % version_win,
+    'tgz': "Lbryum-%s.tar.gz" % version,
+    'zip': "Lbryum-%s.zip" % version,
+    'mac': "Lbryum-%s.dmg" % version_mac,
+    'win': "Lbryum-%s.exe" % version_win,
+    'win_setup': "Lbryum-%s-setup.exe" % version_win,
+    'win_portable': "Lbryum-%s-portable.exe" % version_win,
 }
 
 for k, n in files.items():

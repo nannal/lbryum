@@ -22,9 +22,9 @@ from util import PrintError
 from wallet import Wallet, wallet_types
 from i18n import _
 
-MSG_GENERATING_WAIT = _("Electrum is generating your addresses, please wait...")
+MSG_GENERATING_WAIT = _("Lbryum is generating your addresses, please wait...")
 MSG_ENTER_ANYTHING = _("Please enter a seed phrase, a master key, a list of "
-                       "Bitcoin addresses, or a list of private keys")
+                       "LBC addresses, or a list of private keys")
 MSG_ENTER_SEED_OR_MPK = _("Please enter a seed phrase or a master key (xpub or xprv):")
 MSG_VERIFY_SEED = _("Your seed is important!\nTo make sure that you have properly saved your seed, please retype it here.")
 MSG_COSIGNER = _("Please enter the master public key of cosigner #%d:")

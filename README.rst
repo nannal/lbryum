@@ -1,4 +1,4 @@
-Electrum - lightweight Bitcoin client
+Libryum - lightweight Lbry client
 =====================================
 
 ::
@@ -9,37 +9,15 @@ Electrum - lightweight Bitcoin client
   Homepage: https://electrum.org/
 
 
-.. image:: https://travis-ci.org/spesmilo/electrum.svg?branch=master
-    :target: https://travis-ci.org/spesmilo/electrum
-    :alt: Build Status
-
-
 1. GETTING STARTED
 ------------------
 
-To run Electrum from this directory, just do::
+To run Libryum from this directory, just do::
 
-    ./electrum
+    ./libryum
 
-If you install Electrum on your system, you can run it from any
+If you install Libryum on your system, you can run it from any
 directory.
-
-If you have pip, you can do::
-
-    python setup.py sdist
-    sudo pip install --pre dist/Electrum-2.0.tar.gz
-
-
-If you don't have pip, install with::
-
-    python setup.py sdist
-    sudo python setup.py install
-
-
-
-To start Electrum from your web browser, see
-http://electrum.org/bitcoin_URIs.html
-
 
 
 2. HOW OFFICIAL PACKAGES ARE CREATED
@@ -58,4 +36,4 @@ On Mac OS X::
     # On brew installs
     ARCHFLAGS="-arch i386 -arch x86_64" sudo python setup-release.py py2app --includes sip
 
-    sudo hdiutil create -fs HFS+ -volname "Electrum" -srcfolder dist/Electrum.app dist/electrum-VERSION-macosx.dmg
+    sudo hdiutil create -fs HFS+ -volname "Libryum" -srcfolder dist/Libryum.app dist/libryum-VERSION-macosx.dmg

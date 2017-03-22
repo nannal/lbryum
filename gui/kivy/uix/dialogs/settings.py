@@ -69,12 +69,12 @@ Builder.load_string('''
                 SettingsItem:
                     bu: app.base_unit
                     title: _('Denomination') + ': ' + self.bu
-                    description: _("Base unit for Bitcoin amounts.")
+                    description: _("Base unit for lbry amounts.")
                     action: partial(root.unit_dialog, self)
                 SettingsItem:
                     status: root.fee_status()
                     title: _('Fees') + ': ' + self.status
-                    description: _("Fees paid to the Bitcoin miners.")
+                    description: _("Fees paid to the Lbry miners.")
                     action: partial(root.fee_dialog, self)
                 SettingsItem:
                     status: root.fx_status()
@@ -88,7 +88,7 @@ Builder.load_string('''
                     action: partial(root.plugin_dialog, 'labels', self)
                 SettingsItem:
                     title: _('OpenAlias')
-                    description: "DNS record that stores one of your Bitcoin addresses."
+                    description: "DNS record that stores one of your Lbry addresses."
                     action: partial(root.openalias_dialog, self)
         BoxLayout:
             size_hint: 1, 0.1
@@ -186,4 +186,3 @@ class SettingsDialog(Factory.Popup):
             label.status = self.fx_status()
         d = FxDialog(self.app, self.plugins, self.config, cb)
         d.open()
-

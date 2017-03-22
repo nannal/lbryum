@@ -35,7 +35,7 @@ class Contacts(StoreDict):
                 'type': 'openalias',
                 'validated': validated
             }
-        raise Exception("Invalid Bitcoin address or alias", k)
+        raise Exception("Invalid Lbry address or alias", k)
 
     def resolve_openalias(self, url):
         # support email-style addresses, per the OA standard
@@ -59,4 +59,3 @@ class Contacts(StoreDict):
             return regex.search(haystack).groups()[0]
         except AttributeError:
             return None
-

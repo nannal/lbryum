@@ -82,15 +82,15 @@ def modal_question(q, msg, pos_text = 'OK', neg_text = 'Cancel'):
 def make_layout(s):
     content = """
 
-      <LinearLayout 
+      <LinearLayout
         android:id="@+id/zz"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
         android:background="#ff222222">
 
         <TextView
           android:id="@+id/textElectrum"
-          android:text="Electrum Authenticator"
+          android:text="Lbryum Authenticator"
           android:textSize="7pt"
           android:textColor="#ff4444ff"
           android:gravity="left"
@@ -105,12 +105,12 @@ def make_layout(s):
     return """<?xml version="1.0" encoding="utf-8"?>
       <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/background"
-        android:orientation="vertical" 
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" 
+        android:layout_height="match_parent"
         android:background="#ff000022">
 
-      %s 
+      %s
       </LinearLayout>"""%content
 
 

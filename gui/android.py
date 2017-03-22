@@ -581,7 +581,7 @@ def payto_loop():
                 amount = droid.fullQueryDetail('amount').result.get('text')
 
                 if not is_address(recipient):
-                    modal_dialog('Error','Invalid Bitcoin address')
+                    modal_dialog('Error','Invalid Lbry address')
                     continue
 
                 try:
@@ -605,7 +605,7 @@ def payto_loop():
                     data = str(r['extras']['SCAN_RESULT']).strip()
                     if data:
                         print "data", data
-                        if re.match('^bitcoin:', data):
+                        if re.match('^lbry:', data):
                             rr = util.parse_URI(data)
                             amount = rr.get('amount')
                             address = rr.get('address')
