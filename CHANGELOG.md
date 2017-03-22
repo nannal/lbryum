@@ -21,6 +21,9 @@ labeled as 2.7.1. Subsequent releases will follow
   *
   *
   *
+## [2.7.12] - 2017-03-22
+### Changed
+ * Changed reference to bitcoin & btc to lbry and lbc
 
 ## [2.7.12] - 2017-03-10
 ### Changed
